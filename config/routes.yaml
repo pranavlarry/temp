@@ -29,3 +29,32 @@ video_code:
     path: '/code/{videoId}'
     controller: App\Controller\HomeController::videoCode
 
+enable_eloqua:
+    path: '/enable'
+    controller: App\Controller\EloquaController::enableEloqua
+
+uninstall_eloqua:
+    path: '/uninstall'
+    controller: App\Controller\EloquaController::uninstallEloqua
+
+oauth_eloqua:
+    path: '/eloquaoauth'
+    controller: App\Controller\EloquaController::eloquaOauth
+
+create_instance_eloqua:
+    path: '/createInstance'
+    controller: App\Controller\EloquaContentController::createInstance
+
+delete_instance_eloqua:
+    path: '/deleteInstance'
+    controller: App\Controller\EloquaContentController::deleteInstance
+
+copy_instance_eloqua:
+    path: '/copyInstance'
+    controller: App\Controller\EloquaContentController::copyInstance
+
+notification_instance_eloqua:
+    path: '/notificationLandingPage'
+    controller: App\Controller\EloquaContentController::notificationLandingPage
+
+

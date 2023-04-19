@@ -2,14 +2,41 @@
 
 {% block body %}
 <body>
+  <script src="https://accounts.google.com/gsi/client" onload="console.log('TODO: add onload function')">  
+  </script>
+  <script>
+    const client = google.accounts.oauth2.initCodeClient({
+    client_id: '422400716364-hpj5blornolke07li4pumktspvdqrd8t.apps.googleusercontent.com',
+    scope: 'https://www.googleapis.com/auth/youtube.readonly',
+    redirect_uri: "postmessage",
+    ux_mode: 'popup',
+    callback: (response) => {
+      console.log(response.code);
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', "https://5a24-171-49-206-241.ngrok-free.app/login/google/callback", true);
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      // Set custom header for CRSF
+      xhr.setRequestHeader('X-Requested-With', 'XmlHttpRequest');
+
+      xhr.onload = function() {
+        console.log(xhr);
+        console.log(xhr.responseText);
+        if (xhr.status === 200 || xhr.status === 302) {
+          //document.location.href = xhr.responseURL;
+        }
+      };
+      xhr.send('code=' + response.code);
+    },
+  });
+  </script>
   <div class="container">
     <div class="login-form">
     <button>
-        <a href="{{ path('login_with_google') }}" class="btn btn-primary">
+        <a onClick="MyWindow=window.open('{{ path('login_with_google') }}','MyWindow','width=600,height=300'); return false;" class="btn btn-primary">
         Login with Google
         </a>
     </button>
-
+    <button onclick="client.requestCode();">Authorize with Google</button>
     </div>
   </div>
 </body>

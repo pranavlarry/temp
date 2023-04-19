@@ -11,17 +11,22 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class HomeController extends AbstractController
 {
     #[Route('/home', name: 'app_home')]
+
     public function index(Request $request)
     {
+
         $session = $request->getSession();
-        $access_token = $session->get('access_token');
-        
-        if (!$access_token) {
+        // $access_token = $session->get('access_token');
+        if (!file_exists("accessToken.txt")) { 
             return $this->redirectToRoute('login');
         }
+        $access_token = explode(",",file_get_contents("accessToken.txt"));
+        // if (!$access_token) {
+        //         return $this->redirectToRoute('login');
+        // }
 
         $client = new Google_Client();
-        $client->setAccessToken($access_token);
+        $client->setAccessToken($access_token[0]);
     
         $youtube = new Google_Service_YouTube($client);
 
@@ -92,12 +97,16 @@ class HomeController extends AbstractController
     {
 
         $session = $request->getSession();
-        $access_token = $session->get('access_token');
-        if (!$access_token) {
+        if (!file_exists("accessToken.txt")) { 
             return $this->redirectToRoute('login');
         }
+        $access_token = explode(" ",file_get_contents("accessToken.txt"));
+        // $access_token = $session->get('access_token');
+        // if (!$access_token) {
+        //     return $this->redirectToRoute('login');
+        // }
         $client = new Google_Client();
-        $client->setAccessToken($access_token);
+        $client->setAccessToken($access_token[0]);
         
 
         $youtube = new Google_Service_YouTube($client);
@@ -121,13 +130,17 @@ class HomeController extends AbstractController
     {
 
         $session = $request->getSession();
-        $access_token = $session->get('access_token');
-        if (!$access_token) {
+        if (!file_exists("accessToken.txt")) { 
             return $this->redirectToRoute('login');
         }
+        $access_token = explode(",",file_get_contents("accessToken.txt"));
+        // $access_token = $session->get('access_token');
+        // if (!$access_token) {
+        //     return $this->redirectToRoute('login');
+        // }
         $client = new Google_Client();
         
-        $client->setAccessToken($access_token);
+        $client->setAccessToken($access_token[0]);
 
         $youtube = new Google_Service_YouTube($client);
         $videosResponse = $youtube->videos->listVideos('snippet', [
