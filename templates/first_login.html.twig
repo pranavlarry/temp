@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
-
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/login.css') }}" /> 
+{% endblock %}
 {% block body %}
 <body>
   <script src="https://accounts.google.com/gsi/client" onload="console.log('TODO: add onload function')">  
@@ -22,7 +24,7 @@
         console.log(xhr);
         console.log(xhr.responseText);
         if (xhr.status === 200 || xhr.status === 302) {
-          //document.location.href = xhr.responseURL;
+          document.location.href = xhr.responseURL;
         }
       };
       xhr.send('code=' + response.code);
@@ -31,12 +33,11 @@
   </script>
   <div class="container">
     <div class="login-form">
-    <button>
-        <a onClick="MyWindow=window.open('{{ path('login_with_google') }}','MyWindow','width=600,height=300'); return false;" class="btn btn-primary">
-        Login with Google
-        </a>
+    
+    <button class="btn" onclick="client.requestCode();">
+        <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google Logo" class="google-logo">
+        <span class="google-login-text">Login with Google</span>
     </button>
-    <button onclick="client.requestCode();">Authorize with Google</button>
     </div>
   </div>
 </body>

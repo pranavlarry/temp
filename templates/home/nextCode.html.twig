@@ -1,18 +1,65 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}
-	{{ video.title }}
+{% block title %}Video Codes
 {% endblock %}
-
 {% block body %}
-	<h1>{{ video.title }}</h1>
-	<div class="video-player">
-		<iframe src="https://www.youtube.com/embed/{{ video.videoId }}" frameborder="0" allowfullscreen></iframe>
+	<div class="video-container">
+		<div class="video-player">
+			<h1>{{ video.title }}</h1>
+			<iframe src="https://www.youtube.com/embed/{{ video.videoId }}" frameborder="0" allowfullscreen width="570" height="308"></iframe>
+		</div>
+
+		<div class="video-details">
+			<div
+				class="video-iframe">
+				{# <h4>Iframe:</h4> #}
+				Iframe:
+				<br>
+				<br>
+				{{ iframe }}
+			</div>
+            <button class="insert-code">Insert Iframe Code To Eloqua Landing Page</button>
+			<div
+				class="video-embed">
+				{# <h4>Embed Code:</h4> #}
+				Embed Code:
+				<br>
+				<br>
+				{{ embedcode }}
+			</div>
+            <button class="insert-code">Insert Embed Code To Eloqua Landing Page</button>
+		</div>
 	</div>
-    <div class="video-player">
-        {{ embedCode }}
-        <br>
-        <br>
-        {{ script1 }}
-    </div>
-{% endblock %}
+	<style>
+	body {
+  font-family: Arial, sans-serif;
+      background-color: #fff;
+}
+
+		.video-player {
+			flex: 1;
+			padding: 0 50px;
+                text-align: center;
+		}
+		.video-details {
+			flex: 1;
+			padding: 75px 50px;
+		}
+		.video-iframe,
+		.video-embed {
+			border: 1px solid #ccc;
+			padding: 10px;
+		}
+        .insert-code {
+            width: 100%;
+            padding: 15px 10px;
+            background-color: #06a616;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+	</style>
+{% endblock %}  

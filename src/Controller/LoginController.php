@@ -24,7 +24,7 @@ class LoginController extends AbstractController
         $session = $request->getSession();
         $access_token = $session->get('access_token');
 
-        if ($access_token) {
+        if (file_exists("accessToken.txt")) {
             return $this->redirectToRoute('home');
         }
         
@@ -84,7 +84,7 @@ class LoginController extends AbstractController
         fwrite($fh, implode(",",$access_token));
         fclose($fh);
         $response->setContent(implode(",",$access_token). gettype($access_token));
-        // $response->headers->set("Location","/home");
+        $response->headers->set("Location","/home");
         // $response->headers->setCookie($cookie);
         $response->setStatusCode(302);
         return $response;
